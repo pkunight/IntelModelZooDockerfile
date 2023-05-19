@@ -11,7 +11,7 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 (2) 进入镜像  
 `docker exec -it [your_name] bash`  
   
-工作目录默认都在/root下  
+工作目录默认都在/root下, 包括/root/models, /root/output以及下载的数据和模型等  
   
 ### recommendation
 #### DIEN
