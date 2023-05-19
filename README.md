@@ -18,7 +18,7 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 **简介**: 推荐领域常见的用户兴趣模型, DIN升级版.  
 **Dockerfile**: dockerfiles/Dockerfile.dien  
 **DockerHub**: `docker pull nightwang/intel_model_zoo:dien_v1`  
-**执行**: `cd /root/model && ./quickstart/recommendation/tensorflow/dien/inference/cpu/inference.sh`  
+**执行**: `cd /root/models && ./quickstart/recommendation/tensorflow/dien/inference/cpu/inference.sh`  
 **使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/recommendation/tensorflow/dien/inference/README.md  
 
 ### text_to_speech
@@ -26,5 +26,5 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 **简介**: 语音合成模型.  
 **Dockerfile**: dockerfiles/Dockerfile.wavenet  
 **DockerHub**: `docker pull nightwang/intel_model_zoo:wavenet_v1`  
-**执行**: `cd /root/model && ./quickstart/text_to_speech/tensorflow/wavenet/inference/cpu/fp32/fp32_inference.sh`  
+**执行**: `cd /root/models && ./quickstart/text_to_speech/tensorflow/wavenet/inference/cpu/fp32/fp32_inference.sh`  
 **使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/text_to_speech/tensorflow/wavenet/inference/fp32/README.md  
