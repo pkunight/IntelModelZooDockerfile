@@ -17,12 +17,12 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 #### DIEN
 **简介**: 推荐领域常见的用户兴趣模型, DIN升级版.  
 **Dockerfile**: dockerfiles/Dockerfile.dien  
-**DockerHub**: nightwang/intel_model_zoo:dien_v1  
+**DockerHub**: `docker pull nightwang/intel_model_zoo:dien_v1`  
 **使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/recommendation/tensorflow/dien/inference/README.md  
 
 ### text_to_speech
 #### WaveNet
 **简介**: 语音合成模型.  
 **Dockerfile**: dockerfiles/Dockerfile.wavenet  
-**DockerHub**: nightwang/intel_model_zoo:wavenet_v1  
+**DockerHub**: `docker pull nightwang/intel_model_zoo:wavenet_v1`  
 **使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/text_to_speech/tensorflow/wavenet/inference/fp32/README.md  
