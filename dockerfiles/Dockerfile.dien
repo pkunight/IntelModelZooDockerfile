@@ -1,0 +1,26 @@
+FROM ubuntu:20.04
+
+RUN apt update \
+    && apt install -y python3 python3-pip wget git \
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    && python -m pip install intel-tensorflow==2.5.0 protobuf==3.20.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+RUN mkdir /root/dataset \
+    && cd /root/dataset \
+    && wget https://zenodo.org/record/3463683/files/data.tar.gz \
+    && wget https://zenodo.org/record/3463683/files/data1.tar.gz \
+    && wget https://zenodo.org/record/3463683/files/data2.tar.gz \
+    && tar -jxf data.tar.gz \
+    && mv data/* . \
+    && tar -jxvf data1.tar.gz \
+    && mv data1/* . \
+    && tar -jxvf data2.tar.gz \
+    && mv data2/* . \
+    && rm -rf data* \
+    && cd /root \
+    && git clone https://github.com/IntelAI/models.git \
+    && wget https://storage.googleapis.com/intel-optimized-tensorflow/models/v2_7_0/dien_fp32_static_rnn_graph.pb
+
+ENV DATASET_DIR=/root/dataset PRETRAINED_MODEL=/root/dien_fp32_static_rnn_graph.pb PRECISION=fp32 OUTPUT_DIR=/root/output
+
+ENTRYPOINT ["/bin/bash"]

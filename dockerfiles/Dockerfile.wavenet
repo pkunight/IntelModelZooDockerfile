@@ -1,0 +1,26 @@
+FROM ubuntu:20.04
+
+RUN apt update \
+    && apt install -y build-essential zlib1g-dev libbz2-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget git \
+    && wget https://www.python.org/ftp/python/3.7.16/Python-3.7.16.tgz \
+    && tar xf Python-3.7.16.tgz \
+    && cd Python-3.7.16 \
+    && ./configure --prefix=/root/python37 --enable-optimizations \
+    && make \
+    && make install \
+    && ln -s /root/python37/bin/python3 /usr/bin/python \
+    && ln -s /root/python37/bin/python3 /usr/bin/python3 \
+    && python -m pip install intel-tensorflow==1.15.2 librosa==0.5 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+RUN cd /root \
+    && git clone https://github.com/IntelAI/models.git \
+    && git clone https://github.com/ibab/tensorflow-wavenet.git \
+    && cd tensorflow-wavenet/ \
+    && git fetch origin pull/352/head:cpu_optimized \
+    && git checkout cpu_optimized \
+    && wget https://storage.googleapis.com/intel-optimized-tensorflow/models/wavenet_fp32_pretrained_model.tar.gz \
+    && tar -xf wavenet_fp32_pretrained_model.tar.gz
+    
+ENV TF_WAVENET_DIR=/root/tensorflow-wavenet PRETRAINED_MODEL=/root/wavenet_checkpoints OUTPUT_DIR=/root/output
+
+ENTRYPOINT ["/bin/bash"]
