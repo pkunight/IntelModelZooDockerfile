@@ -10,6 +10,8 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 (2) 进入镜像  
 `docker exec -it [your_name] bash`  
   
+工作目录默认都在/root下  
+  
 ### recommendation
 #### DIEN
 **简介**: 推荐领域常见的用户兴趣模型, DIN升级版.  
