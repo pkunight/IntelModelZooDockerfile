@@ -8,8 +8,6 @@ RUN apt update \
     && ./configure --prefix=/root/python37 \
     && make \
     && make install \
-    && rm /usr/bin/python \
-    && rm /usr/bin/python3 \
     && ln -s /root/python37/bin/python3 /usr/bin/python \
     && ln -s /root/python37/bin/python3 /usr/bin/python3 \
     && python -m pip install intel-tensorflow==1.15.2 protobuf==3.20.1 librosa==0.10.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
