@@ -12,12 +12,13 @@ RUN mkdir /root/dataset \
     && wget https://zenodo.org/record/3463683/files/data2.tar.gz \
     && tar -jxf data.tar.gz \
     && mv data/* . \
-    && tar -jxvf data1.tar.gz \
+    && tar -jxf data1.tar.gz \
     && mv data1/* . \
-    && tar -jxvf data2.tar.gz \
+    && tar -jxf data2.tar.gz \
     && mv data2/* . \
-    && rm -rf data* \
-    && cd /root \
+    && rm -rf data*
+
+RUN cd /root \
     && git clone https://github.com/IntelAI/models.git \
     && wget https://storage.googleapis.com/intel-optimized-tensorflow/models/v2_7_0/dien_fp32_static_rnn_graph.pb
 
