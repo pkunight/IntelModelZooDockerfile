@@ -16,7 +16,7 @@ RUN cd /root \
     && rm bert_large_checkpoints.zip
 
 RUN cd /root \
-    git clone https://github.com/IntelAI/models.git
+    && git clone https://github.com/IntelAI/models.git
 
 ENV DATASET_DIR=/root/wwm_uncased_L-24_H-1024_A-16 PRETRAINED_MODEL=/root/fp32_bert_squad.pb CHECKPOINT_DIR=/root/bert_large_checkpoints PRECISION=fp32 OUTPUT_DIR=/root/output 
 
