@@ -1,0 +1,23 @@
+FROM ubuntu:20.04
+
+RUN apt update \
+    && apt install -y python3 python3-pip wget git unzip \
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    && python -m pip install intel-tensorflow==2.12.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+RUN cd /root \
+    && wget https://storage.googleapis.com/bert_models/2019_05_30/wwm_uncased_L-24_H-1024_A-16.zip \
+    && unzip wwm_uncased_L-24_H-1024_A-16.zip \
+    && rm wwm_uncased_L-24_H-1024_A-16.zip \
+    && wget https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json -P wwm_uncased_L-24_H-1024_A-16 \
+    && wget https://storage.googleapis.com/intel-optimized-tensorflow/models/v2_7_0/fp32_bert_squad.pb \
+    && wget https://storage.googleapis.com/intel-optimized-tensorflow/models/v1_8/bert_large_checkpoints.zip \
+    && unzip bert_large_checkpoints.zip \
+    && rm bert_large_checkpoints.zip
+
+RUN cd /root \
+    git clone https://github.com/IntelAI/models.git
+
+ENV DATASET_DIR=/root/wwm_uncased_L-24_H-1024_A-16 PRETRAINED_MODEL=/root/fp32_bert_squad.pb CHECKPOINT_DIR=/root/bert_large_checkpoints PRECISION=fp32 OUTPUT_DIR=/root/output 
+
+ENTRYPOINT ["/bin/bash"]
