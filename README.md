@@ -25,7 +25,9 @@ dockerfiles/dien/Dockerfile.dien
 **执行训练**:  
 `cd /root/models && ./quickstart/recommendation/tensorflow/dien/training/cpu/training.sh`  
 注: training.sh中, 末尾的launch_benchmark.py需要增加一个参数--num-cores=1, 否则会报错. 而且不知为何脚本只识别一个核, 配置多core就报错  
-**使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/recommendation/tensorflow/dien/inference/README.md  
+**使用说明**:  
+https://github.com/IntelAI/models/blob/master/benchmarks/recommendation/tensorflow/dien/inference/README.md  
+https://github.com/IntelAI/models/blob/master/benchmarks/recommendation/tensorflow/dien/training/README.md  
   
 ### text_to_speech
 #### WaveNet
@@ -36,7 +38,8 @@ dockerfiles/wavenet/Dockerfile.wavenet
 `docker pull nightwang/intel_model_zoo:wavenet_v1`  
 **执行预测**:  
 `cd /root/models && ./quickstart/text_to_speech/tensorflow/wavenet/inference/cpu/fp32/fp32_inference.sh`  
-**使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/text_to_speech/tensorflow/wavenet/inference/fp32/README.md  
+**使用说明**:  
+https://github.com/IntelAI/models/blob/master/benchmarks/text_to_speech/tensorflow/wavenet/inference/fp32/README.md  
   
 ### language_modeling
 #### BERT large
@@ -47,4 +50,5 @@ dockerfiles/bert/Dockerfile.bert_large
 `docker pull nightwang/intel_model_zoo:bert_large_v1`  
 **执行预测**:  
 `cd /root/models && ./quickstart/language_modeling/tensorflow/bert_large/inference/cpu/inference.sh`  
-**使用说明**: https://github.com/IntelAI/models/tree/master/benchmarks/language_modeling/tensorflow/bert_large/inference  
+**使用说明**:  
+https://github.com/IntelAI/models/tree/master/benchmarks/language_modeling/tensorflow/bert_large/inference  
