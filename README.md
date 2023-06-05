@@ -16,8 +16,10 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 ### recommendation
 #### DIEN
 **简介**: 推荐领域常见的用户兴趣模型, DIN升级版.  
-**Dockerfile**: dockerfiles/dien/Dockerfile.dien  
-**DockerHub**: `docker pull nightwang/intel_model_zoo:dien_v1`  
+**Dockerfile**:  
+dockerfiles/dien/Dockerfile.dien  
+**DockerHub**:  
+`docker pull nightwang/intel_model_zoo:dien_v1`  
 **执行预测**:  
 `cd /root/models && ./quickstart/recommendation/tensorflow/dien/inference/cpu/inference.sh`  
 **执行训练**:  
@@ -28,8 +30,10 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 ### text_to_speech
 #### WaveNet
 **简介**: 语音合成模型.  
-**Dockerfile**: dockerfiles/wavenet/Dockerfile.wavenet  
-**DockerHub**: `docker pull nightwang/intel_model_zoo:wavenet_v1`  
+**Dockerfile**:  
+dockerfiles/wavenet/Dockerfile.wavenet  
+**DockerHub**: 
+`docker pull nightwang/intel_model_zoo:wavenet_v1`  
 **执行预测**:  
 `cd /root/models && ./quickstart/text_to_speech/tensorflow/wavenet/inference/cpu/fp32/fp32_inference.sh`  
 **使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/text_to_speech/tensorflow/wavenet/inference/fp32/README.md  
@@ -37,8 +41,10 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 ### language_modeling
 #### BERT large
 **简介**: 自然语言处理领域常见模型.  
-**Dockerfile**: dockerfiles/bert/Dockerfile.bert_large  
-**DockerHub**: `docker pull nightwang/intel_model_zoo:bert_large_v1`  
+**Dockerfile**:  
+dockerfiles/bert/Dockerfile.bert_large  
+**DockerHub**:  
+`docker pull nightwang/intel_model_zoo:bert_large_v1`  
 **执行预测**:  
 `cd /root/models && ./quickstart/language_modeling/tensorflow/bert_large/inference/cpu/inference.sh`  
 **使用说明**: https://github.com/IntelAI/models/tree/master/benchmarks/language_modeling/tensorflow/bert_large/inference  
