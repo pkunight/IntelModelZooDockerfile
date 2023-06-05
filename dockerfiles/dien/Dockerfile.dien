@@ -5,6 +5,17 @@ RUN apt update \
     && ln -s /usr/bin/python3 /usr/bin/python \
     && python -m pip install intel-tensorflow==2.12.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
 
+RUN cd /root \
+    && apt update \
+    && DEBIAN_FRONTEND=noninteractive apt install -y libopenmpi-dev \
+    && wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz \
+    && tar zxf openmpi-4.1.5.tar.gz \
+    && rm openmpi-4.1.5.tar.gz \
+    && cd openmpi-4.1.5 \
+    && ./configure --prefix=/usr/local \
+    && make \
+    && make install
+
 RUN mkdir /root/dataset \
     && cd /root/dataset \
     && wget https://zenodo.org/record/3463683/files/data.tar.gz \
@@ -19,6 +30,8 @@ RUN mkdir /root/dataset \
     && rm -rf data*
 
 RUN cd /root \
+    && apt update \
+    && apt install -y vim \
     && git clone https://github.com/IntelAI/models.git \
     && wget https://storage.googleapis.com/intel-optimized-tensorflow/models/v2_7_0/dien_fp32_static_rnn_graph.pb
 

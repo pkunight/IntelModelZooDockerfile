@@ -18,7 +18,11 @@ ModelZoo代码库: https://github.com/IntelAI/models/tree/master
 **简介**: 推荐领域常见的用户兴趣模型, DIN升级版.  
 **Dockerfile**: dockerfiles/dien/Dockerfile.dien  
 **DockerHub**: `docker pull nightwang/intel_model_zoo:dien_v1`  
-**执行**: `cd /root/models && ./quickstart/recommendation/tensorflow/dien/inference/cpu/inference.sh`  
+**执行预测**:  
+`cd /root/models && ./quickstart/recommendation/tensorflow/dien/inference/cpu/inference.sh`  
+**执行训练**:  
+`cd /root/models && ./quickstart/recommendation/tensorflow/dien/training/cpu/training.sh
+注: training.sh中, 末尾的launch_benchmark.py需要增加一个参数--num-cores=1, 否则会报错. 而且不知为何脚本只识别一个核, 配置多core就报错`  
 **使用说明**: https://github.com/IntelAI/models/blob/master/benchmarks/recommendation/tensorflow/dien/inference/README.md  
   
 ### text_to_speech
