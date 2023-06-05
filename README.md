@@ -32,7 +32,7 @@ dockerfiles/dien/Dockerfile.dien
 **简介**: 语音合成模型.  
 **Dockerfile**:  
 dockerfiles/wavenet/Dockerfile.wavenet  
-**DockerHub**: 
+**DockerHub**:  
 `docker pull nightwang/intel_model_zoo:wavenet_v1`  
 **执行预测**:  
 `cd /root/models && ./quickstart/text_to_speech/tensorflow/wavenet/inference/cpu/fp32/fp32_inference.sh`  
