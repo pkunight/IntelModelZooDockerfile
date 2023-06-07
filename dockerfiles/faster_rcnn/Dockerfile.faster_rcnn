@@ -1,0 +1,53 @@
+FROM ubuntu:20.04
+
+RUN apt update \
+    && apt install -y build-essential zlib1g-dev libbz2-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget git numactl \
+    && wget https://www.python.org/ftp/python/3.7.16/Python-3.7.16.tgz \
+    && tar xf Python-3.7.16.tgz \
+    && cd Python-3.7.16 \
+    && ./configure --prefix=/root/python37 \
+    && make \
+    && make install \
+    && ln -s /root/python37/bin/python3 /usr/bin/python \
+    && ln -s /root/python37/bin/python3 /usr/bin/python3 \
+    && python -m pip install intel-tensorflow==1.15.2 protobuf==3.20.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+RUN cd /root \
+    && apt update \
+    && apt install -y unzip \
+    && mkdir dataset \
+    && cd dataset \
+    && wget http://images.cocodataset.org/zips/val2017.zip \
+    && unzip val2017.zip \
+    && rm val2017.zip \
+    && wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip \    
+    && unzip annotations_trainval2017.zip \
+    && rm annotations_trainval2017.zip
+
+RUN cd /root \
+    && git clone https://github.com/tensorflow/models.git tf_models \
+    && cd tf_models \
+    && git checkout tags/v1.12.0 \
+    && cd research \
+    && wget -O protobuf.zip https://github.com/google/protobuf/releases/download/v3.0.0/protoc-3.0.0-linux-x86_64.zip \
+    && unzip protobuf.zip \
+    && rm protobuf.zip \
+    && ./bin/protoc object_detection/protos/*.proto --python_out=.
+
+RUN cd /root \
+    && python -m pip install pycocotools==2.0.2 -i https://pypi.tuna.tsinghua.edu.cn/simple \
+    && export DATASET_DIR=/root/dataset \
+    && export TF_MODELS_DIR=/root/tf_models \
+    && wget https://raw.githubusercontent.com/IntelAI/models/master/datasets/coco/preprocess_coco_val.sh \
+    && bash preprocess_coco_val.sh
+
+RUN cd /root \
+    && wget https://storage.googleapis.com/intel-optimized-tensorflow/models/faster_rcnn_resnet50_fp32_coco_pretrained_model.tar.gz \
+    && tar -xf faster_rcnn_resnet50_fp32_coco_pretrained_model.tar.gz
+
+RUN cd /root \
+    && git clone https://github.com/IntelAI/models.git
+
+ENV DATASET_DIR=/root/dataset TF_MODELS_DIR=/root/tf_models PRETRAINED_MODEL=/root/faster_rcnn_resnet50_fp32_coco OUTPUT_DIR=/root/output
+
+ENTRYPOINT ["/bin/bash"]
