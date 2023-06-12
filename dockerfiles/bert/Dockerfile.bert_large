@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
-RUN apt update \
-    && apt install -y python3 python3-pip wget git unzip \
+RUN apt-get update \
+    && apt-get install -y python3 python3-pip wget git unzip \
     && ln -s /usr/bin/python3 /usr/bin/python \
     && python -m pip install intel-tensorflow==2.12.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
 
@@ -17,6 +17,24 @@ RUN cd /root \
 
 RUN cd /root \
     && git clone https://github.com/IntelAI/models.git
+
+# 注: 安装OpenMPI, 只有训练需要用到
+RUN cd /root \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y libopenmpi-dev \
+    && wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz \
+    && tar zxf openmpi-4.1.5.tar.gz \
+    && rm openmpi-4.1.5.tar.gz \
+    && cd openmpi-4.1.5 \
+    && ./configure --prefix=/usr/local \
+    && make \
+    && make install
+
+# 注: 这里给训练用的数据量太大了, 因此提前做好了一个part提供下载. 具体制作过程参见https://github.com/mlcommons/training/tree/master/language_model/tensorflow/bert#download-and-preprocess-datasets
+RUN cd /root \
+    && mkdir tf_records \
+    && cd tf_records \
+    && wget http://124.225.164.15:10717/tf_records/part-00430-of-00500
 
 ENV DATASET_DIR=/root/wwm_uncased_L-24_H-1024_A-16 PRETRAINED_MODEL=/root/fp32_bert_squad.pb CHECKPOINT_DIR=/root/bert_large_checkpoints PRECISION=fp32 OUTPUT_DIR=/root/output 
 

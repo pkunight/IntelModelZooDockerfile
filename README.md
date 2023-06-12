@@ -49,6 +49,16 @@ dockerfiles/bert/Dockerfile.bert_large
 **DockerHub**:  
 `docker pull nightwang/intel_model_zoo:bert_large_v1`  
 **执行预测**:  
-`cd /root/models && ./quickstart/language_modeling/tensorflow/bert_large/inference/cpu/inference.sh`  
+```
+export DATASET_DIR=/root/wwm_uncased_L-24_H-1024_A-16/
+cd /root/models
+./quickstart/language_modeling/tensorflow/bert_large/inference/cpu/inference.sh
+```  
+**执行训练**:  
+```
+export DATASET_DIR=/root/
+cd /root/models
+./quickstart/language_modeling/tensorflow/bert_large/training/cpu/pretraining.sh
+```  
 **使用说明**:  
 https://github.com/IntelAI/models/tree/master/benchmarks/language_modeling/tensorflow/bert_large/inference  
